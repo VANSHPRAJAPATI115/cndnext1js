@@ -17,8 +17,8 @@ const testimonialData: Testimonial[] = [
     name: "Devid Weilium",
     designation: "Founder @UIdeck",
     content:
-    "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.", 
-       image: "/images/testimonials/auth-02.png",
+    "They delivered a professional, user-friendly website that perfectly captured our vision—highly recommend!",
+    image: "/images/testimonials/auth-02.png",
     star: 5,
   },
   {
@@ -26,8 +26,8 @@ const testimonialData: Testimonial[] = [
     name: "Lethium Frenci",
     designation: "Founder @Lineicons",
     content:
-    "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
-        image: "/images/testimonials/auth-03.png",
+    "The team created a stunning, easy-to-use website that exceeded our expectations—couldn't be happier!",
+    image: "/images/testimonials/auth-03.png",
     star: 5,
   },
 ];
