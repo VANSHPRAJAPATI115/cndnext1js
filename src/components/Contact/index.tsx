@@ -2,11 +2,43 @@
 
 import { useState } from "react";
 import NewsLatterBox from "./NewsLatterBox";
+import emailjs from "emailjs-com"; // Ensure you have imported emailjs
 
 const Contact = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert("Request successfully submitted!");
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    feedback: ''
+  });
+  const [alertMessage, setAlertMessage] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Show alert for sending
+    setAlertMessage('Sending your message...');
+
+    emailjs.send('service_e60ve5q', 'template_vfdp7yo', formData, 'ULdJMqBqnnSFO-pFg')
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setAlertMessage('Message submitted successfully!'); // Show success alert
+        setFormData({
+          name: '',
+          email: '',
+          feedback: ''
+        });
+        setTimeout(() => setAlertMessage(null), 5000); // Hide after 5 seconds
+      })
+      .catch((error) => {
+        console.error('FAILED...', error);
+        setAlertMessage('Failed to submit Message. Please try again.'); // Show error alert
+        setTimeout(() => setAlertMessage(null), 5000); // Hide after 5 seconds
+      });
   };
 
   return (
@@ -36,6 +68,9 @@ const Contact = () => {
                       </label>
                       <input
                         type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         placeholder="Enter your name"
                         className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                       />
@@ -51,6 +86,9 @@ const Contact = () => {
                       </label>
                       <input
                         type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder="Enter your email"
                         className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                       />
@@ -59,13 +97,15 @@ const Contact = () => {
                   <div className="w-full px-4">
                     <div className="mb-8">
                       <label
-                        htmlFor="message"
+                        htmlFor="feedback"
                         className="mb-3 block text-sm font-medium text-dark dark:text-white"
                       >
                         Your Message
                       </label>
                       <textarea
-                        name="message"
+                        name="feedback"
+                        value={formData.feedback}
+                        onChange={handleChange}
                         rows={5}
                         placeholder="Enter your Message"
                         className="border-stroke w-full resize-none rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
@@ -82,6 +122,15 @@ const Contact = () => {
                   </div>
                 </div>
               </form>
+              {alertMessage && (
+                <div
+                  className={`mt-4 p-4 rounded-sm text-white ${
+                    alertMessage.includes('Failed') ? 'bg-red-500' : 'bg-green-500'
+                  }`}
+                >
+                  <p>{alertMessage}</p>
+                </div>
+              )}
             </div>
           </div>
           <div className="w-full px-4 lg:w-5/12 xl:w-4/12">
