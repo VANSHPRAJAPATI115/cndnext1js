@@ -67,6 +67,9 @@ If you like the template, please star this repository to inspire the team to cre
 # cndnextjs
 
 
+again deployment at 18-11-2024
+
+
 
 
 
