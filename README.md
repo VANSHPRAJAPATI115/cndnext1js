@@ -68,21 +68,12 @@ If you like the template, please star this repository to inspire the team to cre
 
 
 again deployment at 18-11-2024
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "# cndnextjs" 
 "# cndnextjs" 
 "# cndnextjs" 
 # cndnextjs
+
+
+# new update contact page and footer  
+# new update contact page and footer  
+# new update contact page and footer  
